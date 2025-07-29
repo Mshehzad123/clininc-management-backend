@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby "3.0.6"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 6.1.0"
 # Use postgresql as the database for Active Record
