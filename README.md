@@ -1,111 +1,73 @@
-# Clinic Management API & Frontend
+# Clinic Management Backend
 
-A simple full-stack application to manage clinic clients and appointments using a **Ruby on Rails API** and a **React frontend**.
+A Rails API for managing clinic appointments and clients.
 
----
+## Features
 
-## 🚀 Stack Used
+- Client management
+- Appointment scheduling
+- RESTful API endpoints
+- CORS support for frontend integration
 
-- **Backend**: Ruby on Rails (API-only mode)
-  - Ruby 3.2.2
-  - Rails 8.0.2
-  - PostgreSQL 16
-- **Frontend**: React (with Tailwind CSS, Axios)
-  - Node.js v18.20.6
-- **Auth**: Custom API Key-based header authentication
+## API Endpoints
 
----
+- `GET /api/v1/clients` - List all clients
+- `GET /api/v1/appointments` - List all appointments
+- `POST /api/v1/appointments` - Create a new appointment
 
-## 🛠️ Setup Instructions
+## Authentication
 
-### 1. Clone the Repository
+The API uses API key authentication. Include the `X-API-KEY` header with your requests.
 
+## Development
+
+1. Install dependencies:
 ```bash
-git clone https://github.com/muhammadnuman-eng/clinic-management-app.git
-cd clinic_api
-
-Backend Setup (Rails API)
-
 bundle install
-cp .env.example .env
-# Add your API key in the `.env` file
-# Example:
-# API_KEY=your-api-key-here
+   ```
 
+2. Set up the database:
+   ```bash
 rails db:create
 rails db:migrate
+   ```
+
+3. Set environment variables:
+   ```bash
+   export CLINIC_API_KEY=your_api_key_here
+   ```
+
+4. Start the server:
+   ```bash
 rails server
+   ```
 
-Frontend Setup (React)
+## Deployment on Railway
 
-cd clinic-frontend
-npm install
-cp .env.example .env
-# Add the same API key:
-# REACT_APP_API_KEY=your-api-key-here
+1. Connect your repository to Railway
+2. Add a PostgreSQL database to your Railway project
+3. Set the following environment variables in Railway:
+   - `CLINIC_API_KEY` (your API key, e.g., "clinic_2024_secret_key_123")
+   - `ALLOWED_ORIGINS` (comma-separated list of allowed origins, e.g., "https://clininc-management-frontend.vercel.app,http://localhost:3001")
+   - `RAILS_LOG_LEVEL` (optional, defaults to "info")
+   - `DATABASE_URL` (automatically set by Railway when you add PostgreSQL)
 
-npm start
+4. Railway will automatically detect the Rails application and deploy it using the Procfile.
 
-📦 Configuration
-API Key: Must be sent in headers as X-API-KEY
+## Health Check
 
-CORS: Ensure CORS is enabled in Rails for the frontend origin (http://localhost:3001)
+The application includes a health check endpoint at `/up` that returns 200 if the app boots successfully.
 
-✅ Assumptions Made
-New appointments require either:
+## Troubleshooting
 
-An existing client (client_id) or
+If you encounter deployment issues:
 
-A new client via client_attributes
+1. Check the logs in Railway dashboard
+2. Ensure all environment variables are set
+3. Verify the database connection
+4. Check that the API key is properly configured
 
-Date/time for appointments should be future-dated
+## License
 
-Basic validation and error messages are handled on both frontend and backend
-
-⏳ Time Spent
-~7 hours, including:
-
-Backend API design
-
-React setup and component structuring
-
-API key integration and error handling
-
-Basic Tailwind UI
-
-Minimal code refactor (for maintainability)
-
-🚧 Incomplete Items / Future Improvements
-Add specs/tests (RSpec or system tests)
-
-Add filters, pagination, or search on lists
-
-Backend error serialization (standardize error responses)
-
-Improve modal accessibility
-
-Convert to TypeScript for frontend robustness
-
-🌐 Deployment
-No deployment link provided. Application tested locally only.
-
-🐘 PostgreSQL Setup (Linux - Example
-
-sudo service postgresql start
-
-# Create user and database (if needed)
-sudo -u postgres createuser -s your_db_user
-sudo -u postgres createdb clinic_api_development
-
-📁 Directory Structure
-clinic_api/
-├── app/
-├── config/
-├── clinic-frontend/
-│   ├── src/
-│   ├── .env.example
-│   └── ...
-├── .env.example
-├── .gitignore
-└── README.md
+This project is licensed under the MIT License.
 

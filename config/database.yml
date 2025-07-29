@@ -80,7 +80,7 @@ test:
 #
 production:
   <<: *default
-  url: postgresql://postgres:aKwbrwRebTTKyhDQvucyMTsIdiURfhru@trolley.proxy.rlwy.net:11511/railway
+  url: <%= ENV['DATABASE_URL'] %>
   # queue:
   #   <<: *default
   #   url: <%= ENV['DATABASE_URL'] %>

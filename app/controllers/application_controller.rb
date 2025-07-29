@@ -5,9 +5,9 @@ class ApplicationController < ActionController::API
 
   def authenticate_api_key!
     api_key = request.headers["X-API-KEY"]
-    puts "api key is #{api_key}"
+    Rails.logger.info "API key received: #{api_key ? 'present' : 'missing'}"
     unless api_key && api_key == ENV["CLINIC_API_KEY"]
-    render json: { error: "Unauthorized" }, status: :unauthorized
+      render json: { error: "Unauthorized" }, status: :unauthorized
     end
   end
 end
